@@ -6,7 +6,7 @@ using ResitalWE.Core.Entities;
 
 namespace ResitalWE.Entities.Concrete
 {
-    public class CHare:IEntity
+    public class CHare : IEntity
     {
         [Key]
         public string CariNo { get; set; }
@@ -18,5 +18,6 @@ namespace ResitalWE.Entities.Concrete
         public decimal? BorcTutar { get; set; }
         public decimal? AlacakTutar { get; set; }
         public string Aciklama { get; set; }
+      
     }
 }

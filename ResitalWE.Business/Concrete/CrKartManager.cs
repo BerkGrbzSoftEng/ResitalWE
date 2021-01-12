@@ -21,7 +21,7 @@ namespace ResitalWE.Business.Concrete
         }
 
 
-        public IDataResult<List<CKart>> GetList(Expression<Func<CKart, bool>> expression)
+        public IDataResult<List<CKart>> GetList(Expression<Func<CKart, bool>> expression=null)
         {
             return new SuccessDataResult<List<CKart>>(_crKartDal.GetList(expression).ToList());
         }

@@ -22,14 +22,14 @@ namespace ResitalWE.WebUI.Controllers
         [HttpGet("cari-bakiye-listesi")]
         public IActionResult CariBakiye()
         {
-            var result = _crService.GetList(x=>x.Tip=="Müşteri");
+            var result = _crService.GetList(x => x.Tip == "Müşteri");
             List<CariBakiyeModel> model = new List<CariBakiyeModel>();
 
             foreach (var item in result.Data)
             {
                 CariBakiyeModel obj = new CariBakiyeModel();
                 obj.Unvan = item.Unvan;
-                obj.Bakiye = string.Format("{0:0.##}",item.Bakiye);
+                obj.Bakiye = string.Format("{0:0.##}", item.Bakiye);
                 obj.CariNo = item.CariNo;
                 obj.Telefon1 = item.Telefon;
                 obj.Telefon2 = item.CepTelefon;
@@ -43,31 +43,53 @@ namespace ResitalWE.WebUI.Controllers
         [HttpGet("cari-ekstre")]
         public IActionResult CariEkstre()
         {
-            return View();
-        }
-
-        [HttpGet("cari-adres-listesi")]
-        public IActionResult AdresListesi()
-        {
-            return View();
-        }
-        [HttpGet("cari-hareket")]
-        public IActionResult CariHareket()
-        {
-            var result = _chareService.GetList();
-            List<CariHareketModel> model=new List<CariHareketModel>();
-            foreach (var item in result.Data)
+            var result = _crService.GetList().Data;
+            List<CariEkstreListModel> model = new List<CariEkstreListModel>();
+            foreach (var item in result)
             {
-                CariHareketModel obj=new CariHareketModel();
-                obj.Aciklama = item.Aciklama;
-                obj.AlacakTutar = string.Format("{0:0.##}",item.AlacakTutar);
-                obj.BorcTutar = string.Format("{0:0.##}", item.BorcTutar);
-                obj.Tutar = string.Format("{0:0.##}", item.Tutar);
-                obj.CariNo = item.CariNo;
-                obj.Tarih = item.Tarih;
-                model.Add(obj);
+                model.Add(new CariEkstreListModel
+                {
+                    
+                    CariNo = item.CariNo,
+                    Unvan = item.Unvan,
+                    Bakiye = string.Format("{0:0.##}",item.Bakiye)
+                });
             }
             return View(model);
         }
+        [HttpGet("cari-ekstre/cari-ekstre-detay/{cariNo?}")]
+        public IActionResult CariEkstreDetay(string cariNo)
+        {
+            return View();
+        }
+        [HttpGet("cari-adres-listesi")]
+        public IActionResult AdresListesi()
+        {
+            var result = _crService.GetList().Data;
+            List<CariAdresListesiModel> model=new List<CariAdresListesiModel>();
+            foreach (var item in result)
+            {
+                model.Add(new CariAdresListesiModel
+                {
+                    Telefon1 = item.Telefon,
+                    Telefon2 = item.CepTelefon,
+                    CariNo = item.CariNo,
+                    Unvan = item.Unvan,
+                    Adres = item.Adres1+" "+item.Adres2+" "+item.Adres3
+                });
+            }
+            return View(model);
+        }
+
+        [HttpGet("cari-hareket")]
+        public IActionResult CariHareket()
+        {
+            var result = _chareService.GetList().Data;
+            List<CHare> model=new List<CHare>();
+            model.AddRange(result);
+            return View(model);
+        }
+
+       
     }
 }

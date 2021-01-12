@@ -19,5 +19,8 @@ namespace ResitalWE.Entities.Concrete
         public string Telefon { get; set; }
         public string Email { get; set; }
         public string Tip { get; set; }
+        public string Adres1 { get; set; }
+        public string Adres2 { get; set; }
+        public string Adres3 { get; set; }
     }
 }

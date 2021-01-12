@@ -9,7 +9,7 @@ namespace ResitalWE.Business.Abstract
 {
     public interface ICrKartService
     {
-        IDataResult<List<CKart>> GetList(Expression<Func<CKart,bool>> expression);
+        IDataResult<List<CKart>> GetList(Expression<Func<CKart,bool>> expression=null);
         IDataResult<CKart> GetByCariNo(string CariNo);
         IResult Count();
     }

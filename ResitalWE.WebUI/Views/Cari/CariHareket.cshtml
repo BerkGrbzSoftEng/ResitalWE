@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ResitalWE.WebUI.Models.CariHareketModel>
+﻿@model IEnumerable<ResitalWE.Entities.Concrete.CHare>
 @{
     ViewData["Title"] = "Cari Hareket";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,36 +21,45 @@
                     <thead>
                         <tr>
                             <th class="text-center">Cari No</th>
-                            <th  class="text-center">Aciklama</th>
-                            <th class="text-center">Borç Tutar</th>
-                            <th class="text-center">Alacak Tutar</th>
-                            <th  class="text-center">Tutar</th>
+                            <th class="text-center">Aciklama</th>
+                 
+                            <th class="text-center">Tutar</th>
+                            <th class="text-center">BA</th>
                             <th class="text-center">Tarih</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td class="text-center">@item.CariNo</td>
-                            <td class="text-center">@item.Aciklama</td>
-                            <td class="text-center">@item.BorcTutar</td>
-                            <td class="text-center">@item.AlacakTutar₺</td>
-                            <td class="text-center">@item.Tutar₺</td>
-                            <td class="text-center">@item.Tarih</td>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@item.CariNo</td>
+                                <td class="text-center">@item.Aciklama</td>
+                                <td class="text-center">@string.Format("{0:0.##}", item.Tutar)₺</td>
+                                <td class="text-center">
+                                    @if (@item.BA == 'B')
+                                    {
+                                        <span class="badge outline-badge-danger"> Borçlu </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge outline-badge-success"> Alacaklı </span>
+                                    }
+                            </td>
+                            <td class="text-center">@item.Tarih.ToString("dd/MM/yyyy")</td>
 
                         </tr>
                     }
-             
+
 
                     </tbody>
                     <tfoot>
                         <tr>
                             <th class="text-center">Cari No</th>
-                            <th class="text-center">Unvan</th>
-                            <th class="text-center">Giriş</th>
-                            <th class="text-center">Çıkış</th>
-                            <th class="text-center">Toplam</th>
+                            <th class="text-center">Aciklama</th>
+                       
+                            <th class="text-center">Tutar</th>
+                            <th class="text-center">BA</th>
+                            <th class="text-center">Tarih</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -72,6 +81,7 @@
                 "sSearchPlaceholder": "Ara...",
                 "sLengthMenu": "Sonuçlar :  _MENU_",
             },
+            "order": [[4, "desc"]],
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7

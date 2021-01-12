@@ -1,8 +1,98 @@
-﻿
+﻿@model IEnumerable<ResitalWE.WebUI.Models.CariAdresListesiModel>
 @{
     ViewData["Title"] = "Adres Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section heads{
+    <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
+    <link href="~/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/apps/contacts.css" rel="stylesheet" type="text/css" />
+}
+<div class="row layout-spacing layout-top-spacing" id="cancel-row">
+    <div class="col-lg-12">
+        <div class="widget-content searchable-container list">
 
-<h1>Adres Listesi</h1>
+            <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-5 col-sm-7 filtered-list-search layout-spacing align-self-center">
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" class="form-control product-search" id="input-search" placeholder="Search Contacts...">
+                        </div>
+                    </form>
+                </div>
 
+                <div class="col-xl-8 col-lg-7 col-md-7 col-sm-5 text-sm-right text-center layout-spacing align-self-center">
+                    <div class="d-flex justify-content-sm-end justify-content-center">
+                         
+                        <div class="switch align-self-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list view-list active-view"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid view-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        </div>
+                    </div>
+
+                  
+                </div>
+            </div>
+
+            <div class="searchable-items list">
+                <div class="items items-header-section">
+                    <div class="item-content">
+                        <div class="">
+                           
+                            <h4>Cari Bilgisi</h4>
+                        </div>
+                   
+                        <div class="user-location">
+                            <h4 style="margin-left: 0;">Adres</h4>
+                        </div>
+                        <div class="user-phone">
+                            <h4 style="margin-left: 3px;">Telefon</h4>
+                        </div>
+                     
+                    </div>
+                </div>
+
+               
+
+         @foreach (var item in Model)
+         {
+             <div class="items">
+                 <div class="item-content">
+                     <div class="user-profile">
+                        
+                         <div class="user-meta-info">
+                             <p class="user-name" data-name="@item.CariNo">@item.CariNo</p>
+                             <p class="user-work" data-occupation="@item.Unvan">@item.Unvan</p>
+                         </div>
+                     </div>
+             
+                     <div class="user-location">
+                         <p class="info-title">Adres: </p>
+                         <p class="usr-location" data-location="@item.Adres">@item.Adres</p>
+                     </div>
+                     <div class="user-phone">
+                         <div class="user-meta-info ">
+                             <p class="info-title">Telefon: </p>
+                             <p class="user-name" data-phone="@item.Telefon1">@item.Telefon1</p>
+                             <p class="user-work" data-phone="@item.Telefon2">@item.Telefon2</p>
+                         </div>
+                       
+                     </div>
+                      
+                 </div>
+             </div>
+         }
+
+               
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/js/apps/contact.js"></script>
+}
