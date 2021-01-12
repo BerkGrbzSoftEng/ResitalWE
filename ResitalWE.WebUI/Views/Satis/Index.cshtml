@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Satış Raporları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section heads{
+    <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
+    <link href="~/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
+}
+<div class="row layout-top-spacing">
+    <div id="tableProgress" class="col-lg-12 col-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Satış Raporu</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content widget-content-area">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Tarih</th>
+                                <th class="text-center">Ara Toplam</th>
+                                <th class="text-center">KDV</th>
+                                <th class="text-center">Toplam</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">BUGÜN</td>
+                                <td class="text-center"></td>
+                                <td class="text-center">
+                                </td>
+                                <td><p class="text-danger text-center"></p></td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center">BİR GÜN ÖNCE</td>
+                                <td class="text-center"></td>
+                                <td class="text-center">
+                                </td>
+                                <td><p class="text-danger text-center"></p></td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center">BU AY</td>
+                                <td class="text-center">268,198.92₺</td>
+                                <td class="text-center">
+                                    46,961,24₺
+                                </td>
+                                <td><p class="text-danger text-center">315,160.06₺</p></td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center">BU YIL</td>
+                                <td class="text-center">8,268,198.92₺</td>
+                                <td class="text-center">
+                                    4,46,961,24₺
+                                </td>
+                                <td><p class="text-danger text-center">12,315,160.06₺</p></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+}

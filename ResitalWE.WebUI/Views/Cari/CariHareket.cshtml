@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ResitalWE.WebUI.Models.CariHareketModel>
+@{
+    ViewData["Title"] = "Cari Hareket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section heads{
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
+}
+<div class="row layout-top-spacing">
+
+    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+        <div class="widget-content widget-content-area br-6">
+            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                <h4>Cari Hareket Listesi</h4>
+            </div>
+            <div class="table-responsive mb-4 mt-4">
+                <table id="zero-config" class="table table-hover" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Cari No</th>
+                            <th  class="text-center">Aciklama</th>
+                            <th class="text-center">Borç Tutar</th>
+                            <th class="text-center">Alacak Tutar</th>
+                            <th  class="text-center">Tutar</th>
+                            <th class="text-center">Tarih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@item.CariNo</td>
+                            <td class="text-center">@item.Aciklama</td>
+                            <td class="text-center">@item.BorcTutar</td>
+                            <td class="text-center">@item.AlacakTutar₺</td>
+                            <td class="text-center">@item.Tutar₺</td>
+                            <td class="text-center">@item.Tarih</td>
+
+                        </tr>
+                    }
+             
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center">Cari No</th>
+                            <th class="text-center">Unvan</th>
+                            <th class="text-center">Giriş</th>
+                            <th class="text-center">Çıkış</th>
+                            <th class="text-center">Toplam</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script src="~/plugins/table/datatable/datatables.js"></script>
+    <script>
+        $('#zero-config').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Toplam _PAGES_ Sayfadan _PAGE_. Sayfadasınız",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Ara...",
+                "sLengthMenu": "Sonuçlar :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7
+        });
+    </script>
+}
