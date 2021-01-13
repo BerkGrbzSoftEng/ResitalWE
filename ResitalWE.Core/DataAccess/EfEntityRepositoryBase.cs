@@ -12,11 +12,7 @@ namespace ResitalWE.Core.DataAccess
     where TEntity:class,IEntity,new()
     where TContext:DbContext,new()
     {
- 
-
-   
- 
-
+        
         #region Min Operation
 
         public decimal Min(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, decimal>> column)
@@ -72,7 +68,7 @@ namespace ResitalWE.Core.DataAccess
 
         }
 
-        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {

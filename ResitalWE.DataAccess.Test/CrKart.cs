@@ -23,12 +23,7 @@ namespace ResitalWE.DataAccess.Test
             Assert.AreEqual(3469,result);
         }
 
-        [TestMethod]
-        public void RemoveCariKart()
-        {
-            bool result = crKartDal.Remove("");
-            Assert.AreEqual(true, result);
-        }
+       
 
     }
 }

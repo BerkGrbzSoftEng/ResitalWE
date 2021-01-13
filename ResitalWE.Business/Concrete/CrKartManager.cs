@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using ResitalWE.Business.Abstract;
 using ResitalWE.Business.Constants;
-using ResitalWE.Core.Utilities.Results;
+ 
 using ResitalWE.DataAccess.Abstract;
 using ResitalWE.Entities.Concrete;
 
@@ -21,30 +21,13 @@ namespace ResitalWE.Business.Concrete
         }
 
 
-        public IDataResult<List<CKart>> GetList(Expression<Func<CKart, bool>> expression=null)
+        public List<CKart> GetList(Expression<Func<CKart, bool>> expression=null)
         {
-            return new SuccessDataResult<List<CKart>>(_crKartDal.GetList(expression).ToList());
+            var result = _crKartDal.GetList(expression).ToList();
+            return result;
         }
 
-        public IDataResult<CKart> GetByCariNo(string CariNo)
-        {
-            if (!string.IsNullOrEmpty(CariNo))
-            {
-               var result=new SuccessDataResult<CKart>(_crKartDal.GetByCariNo(CariNo));
-               return  result;
-            }
-            else
-            {
-               return new ErrorDataResult<CKart>(message:"Cari Numarası Null olamaz");
-            }
-            
-        }
-   
-
-        public IResult Count()
-        {
-            int counted = _crKartDal.Count();
-            return new SuccessResult($"({counted}) Adet Cari Bulunmaktadır");
-        }
+       
+    
     }
 }

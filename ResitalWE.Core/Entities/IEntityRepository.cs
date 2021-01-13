@@ -10,7 +10,7 @@ namespace ResitalWE.Core.Entities
     {
 
         T Get(int id);
-        IList<T> GetList(Expression<Func<T, bool>> filter = null);
+        List<T> GetList(Expression<Func<T, bool>> filter = null);
 
         //Select Ad,Soyad from Table
         IQueryable<TResult> GetAllSelect<TResult>(Expression<Func<T, TResult>> select);

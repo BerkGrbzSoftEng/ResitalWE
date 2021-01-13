@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using ResitalWE.Business.Abstract;
-using ResitalWE.Core.Utilities.Results;
+ 
 using ResitalWE.DataAccess.Abstract;
 using ResitalWE.Entities.Concrete;
 
 namespace ResitalWE.Business.Concrete
 {
-    public class ChareManager:IChareService
+    public class ChareManager : IChareService
     {
         private ICHareDal _cHareDal;
 
@@ -19,9 +20,10 @@ namespace ResitalWE.Business.Concrete
             _cHareDal = cHareDal;
         }
 
-        public IDataResult<List<CHare>> GetList(Expression<Func<CHare, bool>> expression=null)
+        public async Task<List<CHare>> GetList(Expression<Func<CHare, bool>> expression = null)
         {
-           return new SuccessDataResult<List<CHare>>(_cHareDal.GetList(expression).ToList());
+            var result = _cHareDal.GetList(expression).ToList();
+            return result;
         }
     }
 }
