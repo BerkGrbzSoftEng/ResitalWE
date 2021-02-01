@@ -13,10 +13,12 @@ namespace ResitalWE.WebUI.Controllers
     {
         private ICrKartService _crService;
         private IChareService _chareService;
-        public CariController(ICrKartService crService, IChareService chareService)
+        private ICariHareketOzet _cariHareketOzetService;
+        public CariController(ICrKartService crService, IChareService chareService, ICariHareketOzet cariHareketOzetService)
         {
             _crService = crService;
             _chareService = chareService;
+            _cariHareketOzetService = cariHareketOzetService;
         }
 
         [HttpGet("cari-bakiye-listesi")]
@@ -24,7 +26,7 @@ namespace ResitalWE.WebUI.Controllers
         {
             var result = _crService.GetList(x => x.Tip == "Müşteri");
             List<CariBakiyeModel> model = new List<CariBakiyeModel>();
-
+             
             foreach (var item in result)
             {
                 CariBakiyeModel obj = new CariBakiyeModel();
@@ -82,6 +84,7 @@ namespace ResitalWE.WebUI.Controllers
         [HttpGet("cari-adres-listesi")]
         public IActionResult AdresListesi()
         {
+          
             var result = _crService.GetList();
             List<CariAdresListesiModel> model = new List<CariAdresListesiModel>();
             foreach (var item in result)
@@ -101,9 +104,21 @@ namespace ResitalWE.WebUI.Controllers
         [HttpGet("cari-hareket")]
         public IActionResult CariHareket()
         {
-            var result = _chareService.GetList();
-            List<CHare> model = new List<CHare>();
-            model.AddRange(result.Result);
+            var result = _cariHareketOzetService.GetList();
+            List<CariHareketOzetModel> model=new List<CariHareketOzetModel>();
+            foreach (var item in result.Result)
+            {
+                model.Add(new CariHareketOzetModel
+                {
+                    CIKAN = item.CIKAN,
+                    GUNCELLENMETARIHI = item.GUNCELLENMETARIHI,
+                    GIREN = item.GIREN,
+                    ID = item.ID,
+                    KDVDAHIL = item.KDVDAHIL,
+                    KDVHARIC = item.KDVHARIC,
+                    TARIH = item.TARIH
+                });
+            }
             return View(model);
         }
 

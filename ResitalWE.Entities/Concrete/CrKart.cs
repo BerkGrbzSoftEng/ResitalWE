@@ -22,5 +22,6 @@ namespace ResitalWE.Entities.Concrete
         public string Adres1 { get; set; }
         public string Adres2 { get; set; }
         public string Adres3 { get; set; }
+        public string BA { get; set; }
     }
 }

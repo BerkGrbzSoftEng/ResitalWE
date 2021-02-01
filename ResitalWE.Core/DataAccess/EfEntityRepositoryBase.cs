@@ -74,7 +74,7 @@ namespace ResitalWE.Core.DataAccess
             {
                 return filter == null
                     ? context.Set<TEntity>().ToList()
-                    : context.Set<TEntity>().Where(filter).ToList();
+                    : context.Set<TEntity>().Where(filter).ToList(); 
             }
         }
 

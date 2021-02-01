@@ -11,5 +11,6 @@ namespace ResitalWE.Business.Abstract
     public interface IChareService
     {
         Task<List<CHare>> GetList(Expression<Func<CHare, bool>> expression=null);
+      
     }
 }

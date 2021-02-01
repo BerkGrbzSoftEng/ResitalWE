@@ -5,27 +5,25 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ResitalWE.Business.Abstract;
- 
 using ResitalWE.DataAccess.Abstract;
 using ResitalWE.Entities.Concrete;
 
 namespace ResitalWE.Business.Concrete
 {
-    public class ChareManager : IChareService
+    public class CariHareketOzet:ICariHareketOzet
     {
-        private ICHareDal _cHareDal;
+        private IABGCariHareketDal _abgCari;
 
-        public ChareManager(ICHareDal cHareDal)
+        public CariHareketOzet(IABGCariHareketDal abgCari)
         {
-            _cHareDal = cHareDal;
+            _abgCari = abgCari;
         }
 
-        public async Task<List<CHare>> GetList(Expression<Func<CHare, bool>> expression = null)
+
+        public async Task<List<AbgCariHareketOzet>> GetList(Expression<Func<AbgCariHareketOzet, bool>> expression = null)
         {
-            var result = _cHareDal.GetList(expression).ToList();
+            var result = _abgCari.GetOzet(expression).Result.ToList();
             return result;
         }
-
-         
     }
 }

@@ -1,90 +1,92 @@
-﻿@model IEnumerable<ResitalWE.Entities.Concrete.CHare>
+﻿@model IEnumerable<ResitalWE.WebUI.Models.CariHareketOzetModel>
 @{
     ViewData["Title"] = "Cari Hareket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section heads{
-    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
-    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
+    <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
+    <link href="~/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-select/bootstrap-select.min.css">
 }
 <div class="row layout-top-spacing">
-
-    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-
-        <div class="widget-content widget-content-area br-6">
-            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                <h4>Cari Hareket Listesi</h4>
-            </div>
-            <div class="table-responsive mb-4 mt-4">
-                <table id="zero-config" class="table table-hover" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Cari No</th>
-                            <th class="text-center">Aciklama</th>
+    <div id="tableProgress" class="col-lg-12 col-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-header">
                  
-                            <th class="text-center">Tutar</th>
-                            <th class="text-center">BA</th>
-                            <th class="text-center">Tarih</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+                @*<div class="col-xl-12 col-md-12 col-sm-12 col-12  float-right">
+                    <select class="selectpicker float-right">
+                        <option>Ay Seçiniz</option>
+                        <option>01-Ocak</option>
+                        <option>02-Şubat</option>
+                        <option>03-Mart</option>
+                        <option>04-Nisan</option>
+                        <option>05-Mayıs</option>
+                        <option>06-Haziran</option>
+                        <option>07-Temmuz</option>
+                        <option>08-Ağustos</option>
+                        <option>09-Eylül</option>
+                        <option>10-Ekim</option>
+                        <option>11-Kasım</option>
+                        <option>12-Aralık</option>
+                    </select> 
+                </div>*@
+            </div>
+            <div class="widget-content widget-content-area">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+
+                        <thead>
                             <tr>
-                                <td class="text-center">@item.CariNo</td>
-                                <td class="text-center">@item.Aciklama</td>
-                                <td class="text-center">@string.Format("{0:0.##}", item.Tutar)₺</td>
-                                <td class="text-center">
-                                    @if (@item.BA == 'B')
-                                    {
-                                        <span class="badge outline-badge-danger"> Borçlu </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge outline-badge-success"> Alacaklı </span>
-                                    }
-                            </td>
-                            <td class="text-center">@item.Tarih.ToString("dd/MM/yyyy")</td>
+                                <th class="text-center">Tarih</th>
+                                <th class="text-center">Toplam Giriş</th>
+                                <th class="text-center">Toplam Çıkış</th>
+                                <th class="text-center">Toplam(KDV Hariç)</th>
+                                <th class="text-center">Toplam(KDV Dahil)</th>
+                                <th class="text-center">Seçenek</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@item.TARIH</td>
+                                    <td class="text-center">@item.GIREN₺</td>
+                                    <td class="text-center">@item.CIKAN₺</td>
+                                    <td class="text-center">@item.KDVHARIC₺</td>
+                                    <td class="text-center text-danger">@item.KDVDAHIL₺</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-sm" onclick="window.location.href=''" >
+                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>&nbsp; Detay
+                                        </button>
+                                    </td>
+                                </tr> 
+                            }
+                            
+                    
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-center">Tarih</th>
+                                <th class="text-center">Giriş</th>
+                                <th class="text-center">Çıkış</th>
+                                <th class="text-center">Toplam(KDV Hariç)</th>
+                                <th class="text-center">Toplam(KDV Dahil)</th>
+                                <th class="text-center">Seçenek</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
-                        </tr>
-                    }
 
-
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th class="text-center">Cari No</th>
-                            <th class="text-center">Aciklama</th>
-                       
-                            <th class="text-center">Tutar</th>
-                            <th class="text-center">BA</th>
-                            <th class="text-center">Tarih</th>
-                        </tr>
-                    </tfoot>
-                </table>
             </div>
         </div>
     </div>
-
 </div>
+
 
 @section Scripts
 {
-    <script src="~/plugins/table/datatable/datatables.js"></script>
-    <script>
-        $('#zero-config').DataTable({
-            "oLanguage": {
-                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Toplam _PAGES_ Sayfadan _PAGE_. Sayfadasınız",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Ara...",
-                "sLengthMenu": "Sonuçlar :  _MENU_",
-            },
-            "order": [[4, "desc"]],
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
-        });
-    </script>
+    <script src="~/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 }

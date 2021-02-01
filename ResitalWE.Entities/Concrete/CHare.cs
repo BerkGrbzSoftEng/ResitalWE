@@ -9,8 +9,8 @@ namespace ResitalWE.Entities.Concrete
     public class CHare : IEntity
     {
         [Key]
-        public string CariNo { get; set; }
         public int SiraNo { get; set; }
+        public string CariNo { get; set; }
         public DateTime Tarih { get; set; }
         public Int16 Tip { get; set; }
         public char BA { get; set; }

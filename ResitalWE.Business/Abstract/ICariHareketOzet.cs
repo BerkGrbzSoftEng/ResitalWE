@@ -7,10 +7,9 @@ using ResitalWE.Entities.Concrete;
 
 namespace ResitalWE.Business.Abstract
 {
-    public interface ICrKartService
+    public interface ICariHareketOzet
     {
-       List<CKart> GetList(Expression<Func<CKart,bool>> expression=null);
-       List<CKart> TopBorcluList();
-       List<CKart> TopAlacakList();
+        Task<List<AbgCariHareketOzet>> GetList(Expression<Func<AbgCariHareketOzet, bool>> expression = null);
+
     }
 }

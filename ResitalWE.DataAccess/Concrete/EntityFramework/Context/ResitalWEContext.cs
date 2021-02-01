@@ -7,9 +7,16 @@ using ResitalWE.Entities.Report;
 
 namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
 {
-    public class ResitalWEContext:DbContext
+    public class ResitalWEContext : DbContext
     {
-     
+        public DbSet<Report.BankaKrediDetay> BankaKrediDetay { get; set; }
+        public DbSet<CKart> CKart { get; set; }
+        public DbSet<SKart> SKart { get; set; }
+        public DbSet<CHare> CHare { get; set; }
+        public DbSet<AbgCariHareketOzet> AbgCariHareketOzet { get; set; }
+        public DbSet<AbgSatisRapor> ABGSatisRapor { get; set; }
+        public DbSet<ABGSatisYillik> AbgSatisYillik { get; set; }
+        public DbSet<ABGAlisYillik> AbgAlisYillik { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=DECOM20;Trusted_Connection=true");
@@ -19,10 +26,9 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Report.BankaKrediDetay>(entity => { entity.HasNoKey(); });
+
+
         }
-        public DbSet<Report.BankaKrediDetay> BankaKrediDetay { get; set; }
-        public DbSet<CKart> CKart { get; set; }
-        public DbSet<SKart> SKart { get; set; }
-        public DbSet<CHare> Chare { get; set; }
+
     }
 }
