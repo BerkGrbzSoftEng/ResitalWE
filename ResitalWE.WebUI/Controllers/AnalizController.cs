@@ -12,10 +12,11 @@ namespace ResitalWE.WebUI.Controllers
     public class AnalizController : Controller
     {
         private ICrKartService _ckartService;
-
-        public AnalizController(ICrKartService ckartService)
+        private ISFaturaDService _sFaturaDService;
+        public AnalizController(ICrKartService ckartService, ISFaturaDService sFaturaDService)
         {
             _ckartService = ckartService;
+            _sFaturaDService = sFaturaDService;
         }
         [HttpGet("En-Cok-Borclu")]
         public IActionResult TopBorclu()
@@ -51,9 +52,19 @@ namespace ResitalWE.WebUI.Controllers
             return View(model);
         }
 
+        [HttpGet("En-Cok-Satis")]
         public IActionResult TopSatis()
         {
-            return View();
+            List<TopSatisModel> model=new List<TopSatisModel>();
+            var list = _sFaturaDService.GetList();
+            model.AddRange(list.Result.Select(x=>new TopSatisModel
+            {
+                Aciklama = x.Aciklama,
+                StokNo = x.StokNo,
+                NetTutar = x.NetTutar,
+                FisNo = x.FisNo
+            }));
+            return View(model);
         }
 
 

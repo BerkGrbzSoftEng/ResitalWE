@@ -17,6 +17,8 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
         public DbSet<AbgSatisRapor> ABGSatisRapor { get; set; }
         public DbSet<ABGSatisYillik> AbgSatisYillik { get; set; }
         public DbSet<ABGAlisYillik> AbgAlisYillik { get; set; }
+        public DbSet<SFaturaD> SFaturaD { get; set; }
+        public DbSet<CariTahsilatD> CariTahsilatD { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=DECOM20;Trusted_Connection=true");

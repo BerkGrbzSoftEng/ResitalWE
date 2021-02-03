@@ -35,6 +35,12 @@ namespace ResitalWE.Business.DependecyResolver.Autofac
 
             builder.RegisterType<AlisYillikManager>().As<IAlisYillikService>();
             builder.RegisterType<EfAlisYillikDal>().As<IAlisYillikDal>();
+
+            builder.RegisterType<SFaturaDManager>().As<ISFaturaDService>();
+            builder.RegisterType<EFSFaturaDDal>().As<ISFaturaDDal>();
+
+            builder.RegisterType<CariTahsilatManager>().As<ICariTahsilatService>();
+            builder.RegisterType<EfCariTahsilatDDal>().As<ICariTahsilatDDal>();
         }
     }
 }

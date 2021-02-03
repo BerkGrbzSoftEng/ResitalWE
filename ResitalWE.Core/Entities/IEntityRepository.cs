@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ResitalWE.Core.Entities
 {
     public interface IEntityRepository<T> where T:class,IEntity,new()
     {
-
+        Task<List<T>> GetListAsync(Expression<Func<T, bool>> filter = null);
         T Get(int id);
         List<T> GetList(Expression<Func<T, bool>> filter = null);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ResitalWE.Core.Entities;
 
@@ -78,6 +79,15 @@ namespace ResitalWE.Core.DataAccess
             }
         }
 
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> filter = null)
+        {
+            using (var context = new TContext())
+            {
+                return  filter == null
+                    ? await context.Set<TEntity>().ToListAsync()
+                    : await context.Set<TEntity>().Where(filter).ToListAsync();
+            }
+        }
         #endregion
 
         #region Count-Sum Operation
@@ -101,7 +111,7 @@ namespace ResitalWE.Core.DataAccess
 
         #region Object Operation
 
-    
+
         public TEntity Get(int id)
         {
             using (var context = new TContext())

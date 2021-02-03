@@ -424,7 +424,7 @@
                         total: {
                             show: true,
                             showAlways: true,
-                            label: 'Total',
+                            label: 'Toplam',
                             color: '#888ea8',
                             formatter: function (w) {
                                 return w.globals.seriesTotals.reduce(function (a, b) {
@@ -441,7 +441,7 @@
             width: 25,
         },
         series: [985, 737, 270],
-        labels: ['Apparel', 'Electronic', 'Others'],
+        labels: ['Alış', 'Satış', 'Others'],
         responsive: [{
             breakpoint: 1599,
             options: {
