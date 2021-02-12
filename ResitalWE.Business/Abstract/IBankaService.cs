@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ResitalWE.Entities.ComplexType;
 using ResitalWE.Entities.Concrete;
-using ResitalWE.Entities.Report;
 
 namespace ResitalWE.Business.Abstract
 {
-    public interface ISatisRaporService
+    public interface IBankaService
     {
-        Task<List<AbgSatisRapor>> GetList();
-        Task<List<SFaturaD>> GetListDetail(string date);
+        Task<List<CKart>> GetBankList();
+        Task<List<Banka>> GetHareketList(string carino);
     }
 }

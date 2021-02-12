@@ -17,5 +17,8 @@ namespace ResitalWE.Entities.Concrete
         public Nullable<decimal> Miktar { get; set; }
         public Nullable<double> Fiyat { get; set; }
         public Nullable<decimal> Tutar { get; set; }
+        public string Dvz { get; set; }
+        public decimal DvzTutar { get; set; }
+        public double DvzKur { get; set; }
     }
 }

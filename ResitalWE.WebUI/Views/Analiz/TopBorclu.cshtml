@@ -2,13 +2,40 @@
     @{
         ViewData["Title"] = "En Çok Borçlu";
         Layout = "~/Views/Shared/_Layout.cshtml";
+        int value = 100;
     }
     @section heads{
         <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
         <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
+        <link href="~/assets/css/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
     }
     <div class="row layout-top-spacing">
+       
+        @foreach(var item in Model.Take(3))
+    {
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+            <div class="widget widget-card-four">
+                <div class="widget-content">
+                    <div class="w-content">
+                        <div class="w-info">
+                            <h6 class="value">@string.Format("{0:0.00}", @item.Bakiye) ₺</h6>
+                            <p class="">@item.Unvan</p>
+                        </div>
+                        <div class="">
+                            <div class="w-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: @value%" aria-valuenow="@value" aria-valuemin="0" aria-valuemax="@value"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        value = value - 12;
 
+    }
         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
             <div class="widget-content widget-content-area br-6">

@@ -9,6 +9,7 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
 {
     public class ResitalWEContext : DbContext
     {
+
         public DbSet<Report.BankaKrediDetay> BankaKrediDetay { get; set; }
         public DbSet<CKart> CKart { get; set; }
         public DbSet<SKart> SKart { get; set; }
@@ -19,9 +20,11 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
         public DbSet<ABGAlisYillik> AbgAlisYillik { get; set; }
         public DbSet<SFaturaD> SFaturaD { get; set; }
         public DbSet<CariTahsilatD> CariTahsilatD { get; set; }
+        public DbSet<CariOdemeD> CariOdemeD { get; set; }
+  
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=DECOM20;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer($@"Server=DESKTOP-AOR6FI3;Database=OZEL2020;Trusted_Connection=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

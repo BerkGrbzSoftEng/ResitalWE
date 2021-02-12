@@ -6,8 +6,8 @@ using ResitalWE.Entities.ComplexType;
 
 namespace ResitalWE.Business.Abstract
 {
-    public interface ICariTahsilatService
+    public interface ICariOdemeService
     {
-        Task<List<CariTahsilat>> GetTahsilatList();
+        Task<List<CariOdeme>> GetOdemeList();
     }
 }

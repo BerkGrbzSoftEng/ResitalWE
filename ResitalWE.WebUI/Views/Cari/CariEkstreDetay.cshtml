@@ -34,18 +34,22 @@
                         {
                             <tr>
                                 <td class="text-center">@item.CariNo</td>
-                                <td class="text-center">@item.BorcTutar₺</td>
-                                <td class="text-center">@item.AlacakTutar₺</td>
-                                <td class="text-center">@item.ToplamTutar₺</td>
+                                <td class="text-center">@string.Format("{0:0.00}", item.BorcTutar)₺</td>
+                                <td class="text-center">@string.Format("{0:0.00}", item.AlacakTutar)₺</td>
+                                <td class="text-center">@string.Format("{0:0.00}", item.ToplamTutar)₺</td>
                                 <td class="text-center">@item.Aciklama</td>
                                 <td class="text-center">
                                     @if (@item.BA == 'B')
                                     {
                                         <span class="badge outline-badge-danger"> Borçlu </span>
                                     }
-                                    else
+                                    else if(item.BA=='A')
                                     {
                                         <span class="badge outline-badge-success"> Alacaklı </span>
+                                    }
+                                    else
+                                    {
+                                        
                                     }
                                 </td>
                                 <td class="text-center">@item.Tarih.ToString("dd/MM/yyyy")</td>

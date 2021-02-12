@@ -1,52 +1,75 @@
-﻿@model IEnumerable<ResitalWE.WebUI.Models.CariEkstreListModel>
+﻿@model IEnumerable<ResitalWE.WebUI.Models.SatisRaporDetayModel>
 @{
-    ViewData["Title"] = "Cari Ekstre";
+    ViewData["Title"] = "Satis Rapor Detay";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
 @section heads{
+
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
 }
 <div class="row layout-top-spacing">
     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-        <h4>@ViewData["Title"] Listesi</h4>
+        <h3 class="text-danger">@ViewBag.Tarih</h3><h4>Satis Rapor Detay Listesi</h4>
         <div class="widget-content widget-content-area br-6">
             <div class="table-responsive mb-4 mt-4">
                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+
                     <thead>
                         <tr>
-                            <th class="text-center">Cari No</th>
-                            <th class="text-center">Unvan</th>
+                            <th class="text-center">Fis No</th>
+                            <th class="text-center">Stok No</th>
+                            <th class="text-center">Aciklama</th>
+                            <th class="text-center">Tutar</th>
+                            <th class="text-center " >Tarih</th>
+                            
 
-                            <th class="text-center">Bakiye</th>
-                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
+                    @if (Model!=null)
+                    {
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td class="text-center">@item.CariNo</td>
-                                <td class="text-center">@item.Unvan</td>
-                                <td class="text-center">@string.Format("{0:0.00}", item.Bakiye)₺</td>
 
-                                <td class="text-center">
-                                    <button class="btn btn-primary btn-sm mb-2" onclick="window.location.href='cari-ekstre/cari-ekstre-detay/@item.CariNo'">
-                                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>&nbsp; Ekstre
-                                    </button>
-                                </td>
+                            <tr>
+                                <td class="text-danger">@item.FisNo</td>
+                                <td class="text-center">@item.StokNo</td>
+                                <td class="text-center">@item.Aciklama</td>
+                                <td class="text-center">@string.Format("{0:0.00}", item.Tutar)₺</td>
+                                <td class="text-center">@item.Tarih.ToString("dd.MM.yyyy")</td>
+
+
+
+
                             </tr>
                         }
 
+                    }
+                    <tr>
+                        <td class="text-danger"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+
+
+
+
+                    </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th class="text-center">Cari No</th>
-                            <th class="text-center">Unvan</th>
+                            <th class="text-center">Fis No</th>
+                            <th class="text-center">Stok No</th>
+                            <th class="text-center">Aciklama</th>
+                            <th class="text-center">Tutar</th>
+                            <th class="text-center">Tarih</th>
 
-                            <th class="text-center">Bakiye</th>
-                            <th class="text-center"></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -56,6 +79,7 @@
 
 
 </div>
+
 @section Scripts
 {
     <script src="~/plugins/table/datatable/datatables.js"></script>
@@ -63,13 +87,13 @@
     <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
-
+    <script src="https://cdn.datatables.net/plug-ins/1.10.21/filtering/type-based/diacritics-neutralise.js"></script>
     <script>
         $('#html5-extension').DataTable({
             dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
             buttons: {
                 buttons: [
- 
+
                     { extend: 'csv', className: 'btn' },
                     { extend: 'excel', className: 'btn' },
                     { extend: 'print', className: 'btn' }

@@ -24,6 +24,7 @@ namespace ResitalWE.WebUI.Controllers
             Thread.Sleep(500);
             var list = _ckartService.TopBorcluList();
             List<EnCariListeModel> model=new List<EnCariListeModel>();
+
             model.AddRange(list.Select(x=>new EnCariListeModel
             {
                 Bakiye = x.Bakiye,

@@ -41,6 +41,13 @@ namespace ResitalWE.Business.DependecyResolver.Autofac
 
             builder.RegisterType<CariTahsilatManager>().As<ICariTahsilatService>();
             builder.RegisterType<EfCariTahsilatDDal>().As<ICariTahsilatDDal>();
+
+            builder.RegisterType<CariOdemeManager>().As<ICariOdemeService>();
+            builder.RegisterType<EfCariOdemeDDal>().As<ICariOdemeDDal>();
+
+
+            builder.RegisterType<BankaManager>().As<IBankaService>();
+            builder.RegisterType<EfBankaDal>().As<IBankaDal>();
         }
     }
 }

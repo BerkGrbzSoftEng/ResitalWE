@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ResitalWE.Business.Abstract;
 using ResitalWE.DataAccess.Abstract;
+using ResitalWE.Entities.Concrete;
 using ResitalWE.Entities.Report;
 
 namespace ResitalWE.Business.Concrete
@@ -20,6 +21,11 @@ namespace ResitalWE.Business.Concrete
         public async Task<List<AbgSatisRapor>> GetList()
         {
             return await _satisRaporDal.GetList();
+        }
+
+        public async Task<List<SFaturaD>> GetListDetail(string date)
+        {
+            return await _satisRaporDal.GetListDetail(date);
         }
     }
 }

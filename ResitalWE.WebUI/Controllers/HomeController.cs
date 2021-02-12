@@ -32,8 +32,12 @@ namespace ResitalWE.WebUI.Controllers
             {
                 decimal[] dataSatim = _satisYillikService.Getlist().Result.Select(x => x.Price).ToArray();
                 decimal[] dataAlim = _alisYillikService.GetListAsync().Result.Select(x => x.Price).ToArray();
-                decimal total = TotalPriceCheck(dataSatim, dataAlim);
-                return Json(new { success = true, total=total.ToString(),dataSatim = dataSatim, dataAlim = dataAlim, message = "Data Getirme Başarılı" });
+                decimal totalSatim = _satisYillikService.Getlist().Result.Select(x => x.Price).Sum();
+                decimal totalAlim = _alisYillikService.GetListAsync().Result.Select(x => x.Price).Sum();
+                decimal total = totalAlim+totalSatim;
+                return Json(new { success = true, total=total.ToString(),
+                    totalSatim=totalSatim,totalAlim=totalAlim,
+                    dataSatim = dataSatim, dataAlim = dataAlim, message = "Data Getirme Başarılı" });
             }
             catch (Exception e)
             {
@@ -41,19 +45,6 @@ namespace ResitalWE.WebUI.Controllers
             }
         }
 
-        private decimal TotalPriceCheck(decimal[] arraySatis, decimal[] arrayAlis)
-        {
-            if (arraySatis.Length > 0 || arrayAlis.Length > 0)
-            {
-                decimal price = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    price += arraySatis[i] - arrayAlis[i];
-                   
-                }
-                return price;
-            }
-            return 0;
-        }
+ 
     }
 }

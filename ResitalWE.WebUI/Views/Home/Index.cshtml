@@ -317,7 +317,8 @@
                     console.log(data);
                     if (data.success) {
                         if (data.dataSatim.length > 0) {
-                            LoadChart(data.dataSatim, data.dataAlim, data.total)
+                            LoadChart(data.dataSatim, data.dataAlim, data.total);
+                            LoadDonutChart(data.totalAlim, data.totalSatim)
                         } else {
                             console.log("DATA BOS");
                         }
@@ -566,7 +567,7 @@
             area.render();
         }
 
-        function LoadDonutChart() {
+        function LoadDonutChart(data1,data2) {
 
             donutChart = {
                 chart: {
@@ -583,7 +584,7 @@
                     offsetX: 0,
                     offsetY: 0,
                     style: {
-                        fontSize: '18px',
+                        fontSize: '16px',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 'bold',
                         colors: undefined
@@ -614,7 +615,7 @@
                                 show: true,
                                 name: {
                                     show: true,
-                                    fontSize: '29px',
+                                    fontSize: '28px',
                                     fontFamily: 'Nunito, sans-serif',
                                     color: undefined,
                                     offsetY: -10
@@ -648,7 +649,7 @@
                     show: true,
                     width: 25,
                 },
-                series: [985, 737],
+                series: [data1, data2],
                 labels: ['Alış', 'Satış'],
                 responsive: [{
                     breakpoint: 1599,

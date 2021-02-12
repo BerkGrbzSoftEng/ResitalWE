@@ -14,11 +14,15 @@ namespace ResitalWE.WebUI.Controllers
         private ICrKartService _crService;
         private IChareService _chareService;
         private ICariHareketOzet _cariHareketOzetService;
-        public CariController(ICrKartService crService, IChareService chareService, ICariHareketOzet cariHareketOzetService)
+        private ICariTahsilatService _cariTahsilatService;
+        private ICariOdemeService _cariOdemeService;
+        public CariController(ICrKartService crService, IChareService chareService, ICariHareketOzet cariHareketOzetService, ICariTahsilatService cariTahsilatService, ICariOdemeService cariOdemeService)
         {
             _crService = crService;
             _chareService = chareService;
             _cariHareketOzetService = cariHareketOzetService;
+            _cariTahsilatService = cariTahsilatService;
+            _cariOdemeService = cariOdemeService;
         }
 
         [HttpGet("cari-bakiye-listesi")]
@@ -122,6 +126,48 @@ namespace ResitalWE.WebUI.Controllers
             return View(model);
         }
 
+        [HttpGet("Cari-Tahsilat")]
+        public IActionResult CariTahsilat()
+        {
+            List<CariTahsilatOdemeModel> model=new List<CariTahsilatOdemeModel>();
+            var result = _cariTahsilatService.GetTahsilatList();
+            model.AddRange( result.Result.Select(x=>new CariTahsilatOdemeModel
+            {
+                Tutar = x.Tutar,
+                CariNo = x.CariNo,
+                Aciklama = x.Aciklama,
+                Dvz = x.Dvz,
+                DvzTutar = x.DvzTutar,
+                BelgeTarih = x.BelgeTarih,
+                DvzKur = x.DvzKur,
+                EvrakNo = x.EvrakNo,
+                FisNo = x.FisNo,
+                Unvan = x.Unvan
+            }));
 
+            return View(model);
+        }
+
+        [HttpGet("Cari-Odeme")]
+        public IActionResult CariOdeme()
+        {
+            List<CariTahsilatOdemeModel> model = new List<CariTahsilatOdemeModel>();
+            var result = _cariOdemeService.GetOdemeList();
+            model.AddRange(result.Result.Select(x => new CariTahsilatOdemeModel
+            {
+                Tutar = x.Tutar,
+                CariNo = x.CariNo,
+                Aciklama = x.Aciklama,
+                Dvz = x.Dvz,
+                DvzTutar = x.DvzTutar,
+                BelgeTarih = x.BelgeTarih,
+                DvzKur = x.DvzKur,
+                EvrakNo = x.EvrakNo,
+                FisNo = x.FisNo,
+                Unvan = x.Unvan
+            }));
+
+            return View(model);
+        }
     }
 }

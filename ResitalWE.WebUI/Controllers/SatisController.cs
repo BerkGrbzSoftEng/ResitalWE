@@ -35,5 +35,31 @@ namespace ResitalWE.WebUI.Controllers
             }));
             return View(model);
         }
+
+        [HttpGet("satis-raporlari/satis-raporlari-detay/{date?}")]
+        public IActionResult SatisRaporDetails(string date)
+        {
+            List<SatisRaporDetayModel> model = new List<SatisRaporDetayModel>();
+            Thread.Sleep(500);
+            ViewBag.Tarih = date;
+            var result = _satisRaporService.GetListDetail(date.Trim().ToUpper().Replace(" ",string.Empty));
+            if (result.Result!=null)
+            {
+                model.AddRange(result.Result.Select(x => new SatisRaporDetayModel
+                {
+                    FisNo = x.FisNo,
+                    Tutar = (decimal)x.Tutar,
+                    Aciklama = x.Aciklama,
+                    Tarih = (DateTime)x.Tarih,
+                    StokNo = x.StokNo
+                }));
+            }
+            else
+            {
+                return View();
+            }
+           
+            return View(model);
+        }
     }
 }

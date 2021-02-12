@@ -18,6 +18,8 @@ namespace ResitalWE.Entities.Concrete
         public decimal? BorcTutar { get; set; }
         public decimal? AlacakTutar { get; set; }
         public string Aciklama { get; set; }
+        public string EvrakNo { get; set; }
+        public DateTime Vade { get; set; }
       
     }
 }

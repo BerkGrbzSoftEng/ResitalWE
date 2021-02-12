@@ -1,6 +1,6 @@
-﻿@model IEnumerable<ResitalWE.WebUI.Models.CariEkstreListModel>
+﻿@model IEnumerable<ResitalWE.WebUI.Models.CariTahsilatOdemeModel>
 @{
-    ViewData["Title"] = "Cari Ekstre";
+    ViewData["Title"] = "Cari Odeme Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section heads{
@@ -10,43 +10,71 @@
 }
 <div class="row layout-top-spacing">
     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-        <h4>@ViewData["Title"] Listesi</h4>
+        <h4>@ViewData["Title"] </h4>
         <div class="widget-content widget-content-area br-6">
             <div class="table-responsive mb-4 mt-4">
                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                     <thead>
                         <tr>
+
+                            <th class="text-center">Fis No</th>
                             <th class="text-center">Cari No</th>
                             <th class="text-center">Unvan</th>
 
-                            <th class="text-center">Bakiye</th>
-                            <th class="text-center"></th>
+
+                            <th class="text-center">Tutar</th>
+                            <th class="text-center">Evrak No</th>
+
+                            <th class="text-center">Doviz</th>
+                            <th class="text-center">Doviz Tutar</th>
+                            <th class="text-center">Doviz Kur</th>
+                            <th class="text-center">Belge Tarihi</th>
+                            <th class="text-center">Aciklama</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td class="text-center">@item.CariNo</td>
-                                <td class="text-center">@item.Unvan</td>
-                                <td class="text-center">@string.Format("{0:0.00}", item.Bakiye)₺</td>
 
-                                <td class="text-center">
-                                    <button class="btn btn-primary btn-sm mb-2" onclick="window.location.href='cari-ekstre/cari-ekstre-detay/@item.CariNo'">
-                                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>&nbsp; Ekstre
-                                    </button>
+                                <td class="text-center"><span class="badge outline-badge-warning">@item.FisNo</span></td>
+                                <td class="text-center"><span class="badge outline-badge-dark"> @item.CariNo </span></td>
+                                <td class="text-center">@item.Unvan</td>
+
+                                <td>
+                                    <p class="text-danger text-center">@string.Format("{0:0.00}", item.Tutar)₺</p>
                                 </td>
+                                <td class="text-center">@item.EvrakNo</td>
+
+                                <td class="text-center">@item.Dvz</td>
+                                <td class="text-danger text-center">@string.Format("{0:0.00}", item.DvzTutar)</td>
+                                <td class="text-center">@item.DvzKur</td>
+                                <td class="text-center">@item.BelgeTarih.ToString("dd.MM.yyyy")</td>
+                                <td class="text-center"><span class="badge outline-badge-primary">@item.Aciklama</span></td>
+
                             </tr>
                         }
+
 
                     </tbody>
                     <tfoot>
                         <tr>
+                            <th class="text-center">Fis No</th>
                             <th class="text-center">Cari No</th>
                             <th class="text-center">Unvan</th>
 
-                            <th class="text-center">Bakiye</th>
-                            <th class="text-center"></th>
+
+                            <th class="text-center">Tutar</th>
+                            <th class="text-center">Evrak No</th>
+
+                            <th class="text-center">Doviz</th>
+                            <th class="text-center">Doviz Tutar</th>
+                            <th class="text-center">Doviz Kur</th>
+                            <th class="text-center">Belge Tarihi</th>
+                            <th class="text-center">Aciklama</th>
+
+
                         </tr>
                     </tfoot>
                 </table>
@@ -69,7 +97,7 @@
             dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
             buttons: {
                 buttons: [
- 
+
                     { extend: 'csv', className: 'btn' },
                     { extend: 'excel', className: 'btn' },
                     { extend: 'print', className: 'btn' }
@@ -88,3 +116,4 @@
         });
     </script>
 }
+ 
