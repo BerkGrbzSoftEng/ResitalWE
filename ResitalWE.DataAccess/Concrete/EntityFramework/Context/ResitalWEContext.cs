@@ -26,6 +26,9 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
         public DbSet<BankaAyOzet> BankaAyOzet { get; set; }
         public DbSet<vw_ABGCariAylikRapor> vw_ABGCariAylikRapor { get; set; }
         public DbSet<CariAyOzet> CariAyOzet { get; set; }
+        public DbSet<StDepo> StDepo { get; set; }
+        public DbSet<SHare> SHare { get; set; }
+        public DbSet<SKartMM> SKartMM { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -47,7 +50,7 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=OZEL2020;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=DECOM20;Trusted_Connection=true");
         }
 
 
