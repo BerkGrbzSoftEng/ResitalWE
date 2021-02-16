@@ -1,27 +1,58 @@
-﻿
+﻿@model IEnumerable<ResitalWE.WebUI.Models.CariAyOzetModel>
 @{
-    ViewData["Title"] = "Banka Hareket Listesi";
+    ViewData["Title"] = "Cari Aylik Ozet Liste";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 @section heads{
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
-    <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
+    <link href="~/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
 }
 <div class="row layout-top-spacing">
-    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-        <h4>@ViewData["Title"] </h4>
-        <div class="widget-content widget-content-area br-6">
-            <div class="table-responsive mb-2 mt-4">
+    <div class="col-xl-4 col-lg-4 col-sm-4  layout-spacing">
 
+        <div class="table-responsive mb-4 mt-4">
+            <table id="zero-config" class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="text-center">Ay</th>
+                        <th class="text-center">Ay Ad</th>
+                        <th class="text-center">Top. Borc</th>
+                        <th class="text-center">Top. Alacak</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@item.Ay</td>
+                            <td class="text-center">@item.AyAd</td>
+                            <td class="text-center text-danger">@string.Format("{0:C}", item.tBorc)</td>
+                            <td class="text-center text-success">@string.Format("{0:C}", item.tAlacak)</td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+    <div class="col-xl-8 col-lg-8 col-sm-8  layout-spacing">
+        <div class="widget-content widget-content-area br-6">
+            <div class="table-responsive mb-4 mt-4">
                 <table class="table">
                     <tbody>
                         <tr>
 
                             <td>
-                                @Html.DropDownList("Banka", new SelectList(ViewBag.Banka, "Value", "Text"), "Banka Seçiniz", new { @onChange = "selectedtext(this)", @class = "form-control  basic" })
+                                @Html.DropDownList("Ay", new SelectList(ViewBag.Ay, "Value", "Text"), "Ay Seçiniz", new { @onChange = "selectedtext(this)", @class = " form-control " })
 
                             </td>
 
@@ -30,40 +61,24 @@
                     </tbody>
                 </table>
                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
-
                     <thead>
                         <tr>
-                            <th class="text-center">Cari No</th>
-                            <th class="text-center">Evrak No</th>
-                            <th class="text-center">Borc Bakiye</th>
-                            <th class="text-center">Alacak Bakiye</th>
-                            <th class="text-center">Aciklama</th>
-                            <th class="text-center">BA</th>
-                            <th class="text-center">Tarih</th>
-                            <th class="text-center">Vade</th>
+                            <th>CariNo</th>
+                            <th>Unvan</th>
+                            <th>Ay</th>
+                            <th>Ay Ad</th>
+                            <th>Borc</th>
+                            <th>Alacak</th>
+
                         </tr>
                     </thead>
-                    <tbody id="tableHareket">
+                    <tbody>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th class="text-center ">Cari No</th>
-                            <th class="text-center">Evrak No</th>
-                            <th class="text-center">Borc Bakiye</th>
-                            <th class="text-center">Alacak Bakiye</th>
-                            <th class="text-center">Aciklama</th>
-                            <th class="text-center">BA</th>
-                            <th class="text-center">Tarih</th>
-                            <th class="text-center">Vade</th>
 
-                        </tr>
-                    </tfoot>
                 </table>
-
             </div>
         </div>
     </div>
-
 
 </div>
 @section Scripts
@@ -73,15 +88,14 @@
     <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
-    <script src="~/plugins/select2/select2.min.js"></script>
-    <script src="~/plugins/select2/custom-select2.js"></script>
- 
+
+
     <script>
 
         function selectedtext(item) {
 
             $.ajax({
-                url: '/Banka-Hareket-Liste/' + item.value,
+                url: '/Cari-AyOzet-Liste/' + item.value,
                 type: "GET",
                 datatype: 'JSON',
                 success: function (data) {
@@ -99,15 +113,10 @@
         }
 
         function DataTable(data) {
-            $('#html5-extension tfoot th').each( function () {
-                var title = $(this).text();
-                $(this).html( '<input type="text" class="form-control text-center" placeholder=" '+title+'" />' );
-            } );
             $('#html5-extension').dataTable().fnClearTable();
             $('#html5-extension').dataTable().fnDraw();
             $('#html5-extension').dataTable().fnDestroy();
-           
-            var table=$('#html5-extension').DataTable({
+            $('#html5-extension').DataTable({
                 dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
 
                 buttons: {
@@ -118,19 +127,16 @@
                         { extend: 'pdf', className: 'btn' }
                     ]
                 },
-
                 data: data,
                 columns: [
-                    { data: 'cariNo',className:"text-center" },
-                    { data: 'evrakNo', className: "text-center" },
-                    { data: 'borcBakiye', className: "text-center"},
-                    { data: 'alacakBakiye', className: "text-center"},
-                    { data: 'aciklama', className: "text-center" },
-                    { data: 'ba', className: "text-center" },
-                    { data: 'tarih', className: "text-center" },
-                    { data: 'vade', className: "text-center" }
+                    { data: 'cariNo' },
+                    { data: 'unvan' },
+                    { data: 'ay' },
+                    { data: 'ayAd' },
+                    { data: 'borc' },
+                    { data: 'alacak' }
                 ],
-            
+
                 "oLanguage": {
                     "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
                     "sInfo": "Showing page _PAGE_ of _PAGES_",
@@ -138,33 +144,25 @@
                     "sSearchPlaceholder": "Search...",
                     "sLengthMenu": "Results :  _MENU_",
                 },
+
                 "stripeClasses": [],
                 "lengthMenu": [7, 10, 20, 50],
-                "pageLength": 10
+                "pageLength": 12
             });
-           
-            table.columns().every( function () {
-                var that = this;
- 
-                $( 'input', this.footer() ).on( 'keyup change', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
-                } );
-            } );
+
+
         }
 
     </script>
     <script>
-        var ss = $(".basic").select2({
-            tags: true
-        });
+        $('#zero-config').DataTable({
+            bFilter: false,
+            bInfo: false,
+            "bPaginate": false,
+            "bLengthChange": false,
 
+            "bAutoWidth": true
+        });
     </script>
 
 }
-
-
-

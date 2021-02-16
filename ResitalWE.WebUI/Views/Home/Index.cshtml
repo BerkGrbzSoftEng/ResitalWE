@@ -298,12 +298,14 @@
 
 @section Scripts
 {
+    <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
     <script>
         var areaChart;
         var area;
         var donut;
         var donutChart;
-        $(document).ready(function() {
+        $(document).ready(function () {
             GetData();
             LoadDonutChart();
         });
@@ -313,20 +315,57 @@
                 url: '/Home/GetChartData',
                 cache: false,
                 type: "POST",
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
                     if (data.success) {
                         if (data.dataSatim.length > 0) {
+                            const toast = swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                padding: '2em'
+                            });
+
+                            toast({
+                                type: 'success',
+                                title: data.message,
+                                padding: '2em',
+                            })
                             LoadChart(data.dataSatim, data.dataAlim, data.total);
                             LoadDonutChart(data.totalAlim, data.totalSatim)
                         } else {
-                            console.log("DATA BOS");
+                            const toast = swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                padding: '2em'
+                            });
+
+                            toast({
+                                type: 'error',
+                                title: data.message,
+                                padding: '2em',
+                            })
                         }
                     } else {
-                        alert(data.message);
+                        const toast = swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            padding: '2em'
+                        });
+
+                        toast({
+                            type: 'error',
+                            title: data.message,
+                            padding: '2em',
+                        })
                     }
                 },
-                error: function(reponse) {
+                error: function (reponse) {
                     console.log(reponse);
                     alert("error : " + reponse);
                 }
@@ -354,7 +393,7 @@
                         show: true
                     },
                     events: {
-                        mounted: function(ctx, config) {
+                        mounted: function (ctx, config) {
                             const highest1 = ctx.getHighestValueInSeries(0);
                             const highest2 = ctx.getHighestValueInSeries(1);
 
@@ -475,7 +514,7 @@
                 },
                 yaxis: {
                     labels: {
-                        formatter: function(value, index) {
+                        formatter: function (value, index) {
                             return value + '₺'
                         },
                         offsetX: -22,
@@ -567,7 +606,7 @@
             area.render();
         }
 
-        function LoadDonutChart(data1,data2) {
+        function LoadDonutChart(data1, data2) {
 
             donutChart = {
                 chart: {
@@ -578,7 +617,7 @@
                 dataLabels: {
                     enabled: true,
                     enabledOnSeries: undefined,
-               
+
                     textAnchor: 'middle',
                     distributed: false,
                     offsetX: 0,
@@ -589,8 +628,8 @@
                         fontWeight: 'bold',
                         colors: undefined
                     },
-                    
-              
+
+
 
                 },
                 legend: {

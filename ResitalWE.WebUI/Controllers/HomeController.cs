@@ -37,11 +37,11 @@ namespace ResitalWE.WebUI.Controllers
                 decimal total = totalAlim+totalSatim;
                 return Json(new { success = true, total=total.ToString(),
                     totalSatim=totalSatim,totalAlim=totalAlim,
-                    dataSatim = dataSatim, dataAlim = dataAlim, message = "Data Getirme Başarılı" });
+                    dataSatim = dataSatim, dataAlim = dataAlim, message = "Tablo Verileri Başarıyla Getirildi" });
             }
             catch (Exception e)
             {
-                return Json(data: new { success = false, message = "Data Getirme Başarısız" });
+                return Json(data: new { success = false, message = "Tablo Verileri Getirilemedi" });
             }
         }
 

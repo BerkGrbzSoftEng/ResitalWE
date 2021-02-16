@@ -9,6 +9,7 @@ using ResitalWE.DataAccess.Abstract;
 using ResitalWE.DataAccess.Concrete.EntityFramework.Context;
 using ResitalWE.Entities.ComplexType;
 using ResitalWE.Entities.Concrete;
+using ResitalWE.Entities.Report;
 
 namespace ResitalWE.DataAccess.Concrete.EntityFramework
 {
@@ -38,9 +39,9 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework
                                      Aciklama = ch.Aciklama,
                                      BorcBakiye = ch.BorcTutar,
                                      AlacakBakiye = ch.AlacakTutar,
-                                     Tarih = ch.Tarih,
+                                     Tarih = ch.Tarih.ToShortDateString(),
                                      EvrakNo = ch.EvrakNo,
-                                     Vade = ch.Vade,
+                                     Vade = ch.Vade.ToShortDateString(),
                                      BA = ch.BA
                                  };
                     if (result.Count() > 0)
@@ -52,6 +53,40 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework
                 }
 
                 return null;
+            }
+        }
+
+        public async Task<List<vw_ABGBankaAylikRapor>> GetAyOzetList(int ay)
+        {
+            using (var context = new ResitalWEContext())
+            {
+                if (ay > 0)
+                {
+                    var result = context.vw_ABGBankaAylikRapor.Where(x => x.Ay == ay).ToListAsync();
+                    return result.Result;
+
+                }
+
+                return null;
+            }
+        }
+
+        public async Task<List<BankaAyOzet>> GetAylikToplamOzetList()
+        {
+            using (var context = new ResitalWEContext())
+            {
+                List<BankaAyOzet> ozet = new List<BankaAyOzet>();
+                 
+                 var obj = context.BankaAyOzet.FromSqlRaw(
+                     "select distinct Ay,AyAd,SUM(borc) 'tBorc',Sum(alacak) 'tAlacak' from vw_ABGBankaAylikRapor group by ay,AyAd").OrderBy(x=>x.Ay).ToListAsync();
+                ozet.AddRange(obj.Result.Select(x => new BankaAyOzet
+                {
+                    Ay = x.Ay,
+                    AyAd = x.AyAd,
+                    tAlacak = x.tAlacak,
+                    tBorc = x.tBorc
+                }));
+                return ozet;
             }
         }
     }
