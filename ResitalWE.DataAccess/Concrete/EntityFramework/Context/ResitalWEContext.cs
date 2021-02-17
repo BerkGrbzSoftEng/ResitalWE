@@ -29,11 +29,13 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
         public DbSet<StDepo> StDepo { get; set; }
         public DbSet<SHare> SHare { get; set; }
         public DbSet<SKartMM> SKartMM { get; set; }
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Report.BankaKrediDetay>(entity => { entity.HasNoKey(); });
             modelBuilder.Entity<BankaAyOzet>(entity => { entity.HasNoKey(); });
+ 
             modelBuilder.Entity<vw_ABGBankaAylikRapor>(entity =>
             {
                 entity.HasNoKey();
@@ -50,7 +52,7 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=DECOM20;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=OZEL2020;Trusted_Connection=true");
         }
 
 

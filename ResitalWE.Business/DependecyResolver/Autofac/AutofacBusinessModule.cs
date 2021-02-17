@@ -51,6 +51,11 @@ namespace ResitalWE.Business.DependecyResolver.Autofac
 
             builder.RegisterType<CariManager>().As<ICariService>();
             builder.RegisterType<EfCariDal>().As<ICariDal>();
+
+            builder.RegisterType<StokManager>().As<IStokService>();
+            builder.RegisterType<EfStDepoDal>().As<IStDepoDal>();
+            builder.RegisterType<EfSKartMMDal>().As<ISKartMMDal>();
+            builder.RegisterType<EfSHareDal>().As<ISHareDal>();
         }
     }
 }
