@@ -6,6 +6,7 @@ using ResitalWE.Business.Abstract;
 using ResitalWE.DataAccess.Abstract;
 using ResitalWE.DataAccess.Concrete.EntityFramework;
 using ResitalWE.Entities.ComplexType;
+using ResitalWE.Entities.Concrete;
 
 namespace ResitalWE.Business.Concrete
 {
@@ -14,11 +15,13 @@ namespace ResitalWE.Business.Concrete
         private IStDepoDal _stDepoDal;
         private ISHareDal _sHareDal;
         private ISKartMMDal _sKartMmDal;
-        public StokManager(IStDepoDal stDepoDal, ISKartMMDal sKartMmDal, ISHareDal sHareDal)
+        private ISkartDal _skartDal;
+        public StokManager(IStDepoDal stDepoDal, ISKartMMDal sKartMmDal, ISHareDal sHareDal, ISkartDal skartDal)
         {
             _stDepoDal = stDepoDal;
             _sKartMmDal = sKartMmDal;
             _sHareDal = sHareDal;
+            _skartDal = skartDal;
         }
 
         public async Task<List<StokDepo>> StokDepoList()
@@ -26,14 +29,19 @@ namespace ResitalWE.Business.Concrete
             return await _stDepoDal.GetStokDepoList();
         }
 
-        public int Countt()
+        public async Task<List<StokAnalizRapor>> GetStokAnalizRaporList()
         {
-            return _sKartMmDal.Count();
+            return await _sHareDal.GetStokAnalizRaporList();
         }
 
-        public void Result()
+        public List<SKart> GetStokBakiyeMiktarList()
         {
-            var result = _sHareDal.GetStokAnalizRaporList().Result;
+            return _skartDal.GetStokBakiyeMiktarList();
+        }
+
+        public List<SKart> GetStokList()
+        {
+            return _skartDal.GetStokList();
         }
     }
 }

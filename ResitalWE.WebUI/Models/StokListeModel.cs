@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using ResitalWE.Core.Entities;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ResitalWE.Entities.Concrete
+namespace ResitalWE.WebUI.Models
 {
-    public class SKart : IEntity
+    public class StokListeModel
     {
-        [Key]
-
         public string StokNo { get; set; }
         public string StokAdi { get; set; }
 
@@ -18,7 +14,7 @@ namespace ResitalWE.Entities.Concrete
 
         public string Birim { get; set; }
 
-        public double? SatFiyat1 { get; set; }
+        public double? SatFiyat { get; set; }
 
         public double? AlisFiyat { get; set; }
 
@@ -27,8 +23,5 @@ namespace ResitalWE.Entities.Concrete
         public decimal? CikMiktar { get; set; }
 
         public decimal KendiDepoMiktar { get; set; }
-        [NotMapped]
-        public decimal? BakiyeMiktar { get; set; }
-
     }
 }

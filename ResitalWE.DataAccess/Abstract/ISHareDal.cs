@@ -11,5 +11,7 @@ namespace ResitalWE.DataAccess.Abstract
     public interface ISHareDal : IEntityRepository<SHare>
     {
         Task<List<StokAnalizRapor>> GetStokAnalizRaporList();
+    
+
     }
 }

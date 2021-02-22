@@ -38,5 +38,6 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework
 
             }
         }
+         
     }
 }

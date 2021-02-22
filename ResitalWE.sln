@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResitalWE.Core", "ResitalWE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResitalWE.WebUI", "ResitalWE.WebUI\ResitalWE.WebUI.csproj", "{7CA9AC77-032C-4944-92A2-EA8312D1E8AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResitalWE.API", "ResitalWE.API\ResitalWE.API.csproj", "{6BFDAECC-607D-4DF6-8B8D-A5D707CF585D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7CA9AC77-032C-4944-92A2-EA8312D1E8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CA9AC77-032C-4944-92A2-EA8312D1E8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CA9AC77-032C-4944-92A2-EA8312D1E8AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BFDAECC-607D-4DF6-8B8D-A5D707CF585D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFDAECC-607D-4DF6-8B8D-A5D707CF585D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFDAECC-607D-4DF6-8B8D-A5D707CF585D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFDAECC-607D-4DF6-8B8D-A5D707CF585D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
