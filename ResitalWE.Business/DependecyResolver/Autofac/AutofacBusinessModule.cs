@@ -56,6 +56,11 @@ namespace ResitalWE.Business.DependecyResolver.Autofac
             builder.RegisterType<EfStDepoDal>().As<IStDepoDal>();
             builder.RegisterType<EfSKartMMDal>().As<ISKartMMDal>();
             builder.RegisterType<EfSHareDal>().As<ISHareDal>();
+
+
+            builder.RegisterType<DatabaseManager>().As<IDatabaseService>();
+            builder.RegisterType<EfDatabaseDal>().As<IDatabaseDal>();
+
         }
     }
 }

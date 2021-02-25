@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -11,6 +12,8 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
 {
     public class ResitalWEContext : DbContext
     {
+        private static List<string> dbs = new List<string>();
+        public string DatabaseName { get; set; }
         public DbSet<Report.BankaKrediDetay> BankaKrediDetay { get; set; }
         public DbSet<CKart> CKart { get; set; }
         public DbSet<SKart> SKart { get; set; }
@@ -33,6 +36,7 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Report.BankaKrediDetay>(entity => { entity.HasNoKey(); });
             modelBuilder.Entity<BankaAyOzet>(entity => { entity.HasNoKey(); });
 
@@ -50,10 +54,19 @@ namespace ResitalWE.DataAccess.Concrete.EntityFramework.Context
 
         }
 
+        public void Doldur(string dbName)
+        {
+            dbs.Add(dbName);
+            string server = string.Format(@"{0}", Environment.MachineName);
+            OnConfiguring(optionsBuilder: new DbContextOptionsBuilder().UseSqlServer($"Server={server};Database={dbs.Last()};Trusted_Connection=true;Connect Timeout=30"));
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            string server = string.Format(@"{0}", Environment.MachineName);
+            string dbName = dbs.Last();
+            optionsBuilder.UseSqlServer($"Server={server};Database={dbName};Trusted_Connection=true;Connect Timeout=30");
 
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-AOR6FI3;Database=OZEL2020;Trusted_Connection=true");
+
         }
 
 
